@@ -45,7 +45,7 @@ const Sidebar = () => {
           <>
             <li><NavLink to="/audits/logs">Audit Logs</NavLink></li>
             <li>
-              <NavLink to="/auditors/decisions">Final Decisions</NavLink>
+              <NavLink to="/auditors/decision">Final Decisions</NavLink>
             </li>
           </>
         )}

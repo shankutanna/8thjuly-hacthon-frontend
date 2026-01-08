@@ -4,7 +4,6 @@ import { setCredentials } from "./authSlice";
 import { ROLES } from "../utils/roles";
 
 const Login = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -14,7 +13,7 @@ const Login = () => {
                 id: 1,
                 name: "Enterprise User",
                 email: "user@corp.com",
-                role: role
+                role: role,
             },
             token: "fake-jwt-token",
         };
@@ -24,7 +23,7 @@ const Login = () => {
         if (role === ROLES.OPERATIONS) navigate("/operations/dashboard");
         if (role === ROLES.MANAGEMENT) navigate("/management/dashboard");
         if (role === ROLES.LEADERSHIP) navigate("/leadership/dashboard");
-        if (role === ROLES.AUDITORS) navigate("/audits/logs");
+        if (role === ROLES.AUDITORS) navigate("/auditors/logs"); // ✅ FIXED
     };
 
     return (

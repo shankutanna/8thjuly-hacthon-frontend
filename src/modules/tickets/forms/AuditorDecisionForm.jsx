@@ -42,7 +42,6 @@ const AuditorDecisionForm = ({ ticket }) => {
                 <option value="REJECTED">Reject</option>
             </select>
             <p className="text-error text-sm">{errors.auditorDecision?.message}</p>
-
             <button
                 id="auditor-finalize"
                 data-testid="auditor-finalize-button"

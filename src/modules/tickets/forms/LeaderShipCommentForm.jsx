@@ -15,15 +15,20 @@ const LeadershipCommentForm = ({ ticket }) => {
     });
 
     const onSubmit = async (data) => {
-        await updateTicket({
-            id: ticket.id,
-            data: {
-                leadershipComment: data.leadershipComment,
-                status: "FORWARDED_TO_MANAGEMENT",
-            },
-        });
+        try {
+            await updateTicket({
+                id: String(ticket.id),
+                data: {
+                    leadershipComment: data.leadershipComment,
+                    status: "FORWARDED_TO_MANAGEMENT",
+                },
+            }).unwrap();
 
-        alert("Comment added and forwarded to management");
+            alert("Comment added and forwarded to management");
+        } catch (error) {
+            console.error("Update failed:", error);
+            alert("Failed to update ticket");
+        }
     };
 
     return (
@@ -40,6 +45,7 @@ const LeadershipCommentForm = ({ ticket }) => {
             <p className="text-error text-sm">{errors.leadershipComment?.message}</p>
 
             <button
+                type="submit"
                 id="leadership-forward"
                 data-testid="leadership-forward-button"
                 className="btn btn-warning btn-sm"

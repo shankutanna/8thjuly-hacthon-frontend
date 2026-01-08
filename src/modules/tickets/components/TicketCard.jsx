@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import ManagementActionForm from "../forms/ManagementActionForm";
+import LeadershipCommentForm from "../forms/LeadershipCommentForm";
 import AuditorDecisionForm from "../forms/AuditorDecisionForm";
-import LeadershipCommentForm from "../forms/LeaderShipCommentForm";
-
+import { ROLES } from "../../../utils/roles";
+import { TICKET_STATUS } from "../../../utils/ticketStatus";
 
 const TicketCard = ({ ticket }) => {
     const { role } = useSelector((state) => state.auth);
@@ -21,20 +22,19 @@ const TicketCard = ({ ticket }) => {
                 <span className="badge badge-info">{ticket.status}</span>
             </div>
 
-            {/* LEADERSHIP VIEW */}
-            {role === "LEADERSHIP" && ticket.status === "SUBMITTED" && (
+            {role === ROLES.LEADERSHIP && ticket.status === TICKET_STATUS.SUBMITTED && (
                 <LeadershipCommentForm ticket={ticket} />
             )}
 
-            {/* MANAGEMENT VIEW */}
-            {role === "MANAGEMENT" && ticket.status === "FORWARDED_TO_MANAGEMENT" && (
-                <ManagementActionForm ticket={ticket} />
-            )}
+            {role === ROLES.MANAGEMENT &&
+                ticket.status === TICKET_STATUS.FORWARDED_TO_MANAGEMENT && (
+                    <ManagementActionForm ticket={ticket} />
+                )}
 
-            {/* AUDITOR VIEW */}
-            {role === "AUDITORS" && ticket.status === "ACTION_TAKEN" && (
-                <AuditorDecisionForm ticket={ticket} />
-            )}
+            {role === ROLES.AUDITORS &&
+                ticket.status === TICKET_STATUS.ACTION_TAKEN && (
+                    <AuditorDecisionForm ticket={ticket} />
+                )}
         </div>
     );
 };
